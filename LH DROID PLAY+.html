@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>LH DROID PLAY+</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0c15 0%, #121826 100%);
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            min-height: 100vh;
+            padding: 24px 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 850px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* CARD PRINCIPAL */
+        .editor-card {
+            background: rgba(10, 14, 23, 0.95);
+            backdrop-filter: blur(2px);
+            border-radius: 48px;
+            padding: 28px;
+            box-shadow: 0 30px 50px -12px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .logo {
+            display: flex;
+            align-items: baseline;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FFD966, #FF8C42, #E63946);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .badge {
+            background: #ff4d4d20;
+            border: 1px solid #ff4d4d80;
+            border-radius: 60px;
+            padding: 5px 12px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            color: #ffaa88;
+        }
+
+        .sub {
+            color: #8e9fc3;
+            margin-bottom: 28px;
+            border-left: 3px solid #ff8c42;
+            padding-left: 16px;
+            font-size: 0.9rem;
+        }
+
+        /* SEÇÕES EDITÁVEIS */
+        .edit-section {
+            background: #0c1020e0;
+            border-radius: 28px;
+            padding: 20px;
+            margin-bottom: 24px;
+            border: 1px solid #2a345a;
+            transition: 0.2s;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #FFD966;
+            font-size: 1.1rem;
+            letter-spacing: -0.2px;
+        }
+
+        .section-title span {
+            font-size: 1.5rem;
+        }
+
+        label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: #ffb347;
+            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input, textarea {
+            width: 100%;
+            background: #01020b;
+            border: 1px solid #334155;
+            border-radius: 24px;
+            padding: 12px 18px;
+            color: white;
+            font-family: inherit;
+            font-size: 0.9rem;
+            transition: 0.2s;
+            resize: vertical;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #ff8c42;
+            box-shadow: 0 0 0 2px rgba(255, 140, 66, 0.3);
+        }
+
+        textarea {
+            min-height: 70px;
+        }
+
+        .chips-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .chip {
+            background: #1f2a3e;
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            color: #ffcc88;
+        }
+
+        /* PREVIEW AO VIVO */
+        .preview-area {
+            background: #070a14;
+            border-radius: 32px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid #ff8c4240;
+        }
+
+        .preview-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 12px;
+            font-weight: 500;
+            color: #ffb347;
+        }
+
+        .preview-message {
+            background: #0b0f18;
+            border-radius: 24px;
+            padding: 18px;
+            color: #f0f3fa;
+            white-space: pre-wrap;
+            word-break: break-word;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            border: 1px solid #2a3a55;
+            font-family: monospace;
+        }
+
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 16px;
+            justify-content: center;
+        }
+
+        .btn {
+            border: none;
+            background: #1f2a44;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 60px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.9rem;
+            flex: 1 0 auto;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(95deg, #ff8c42, #e05a1a);
+            box-shadow: 0 5px 15px rgba(224, 90, 26, 0.3);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(95deg, #ffa155, #f06a28);
+            transform: scale(0.98);
+        }
+
+        .btn-copy {
+            background: #1e3a2f;
+            border: 1px solid #2e7d5e;
+        }
+
+        .btn-copy:hover {
+            background: #2f6b53;
+        }
+
+        .btn-reset {
+            background: #2a1f3a;
+            border: 1px solid #9b6bdf;
+        }
+
+        .toast-msg {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #0e1525e6;
+            backdrop-filter: blur(12px);
+            border-radius: 60px;
+            padding: 12px 24px;
+            color: #FFD966;
+            font-weight: 600;
+            border: 1px solid #ff8c42;
+            pointer-events: none;
+            transition: 0.2s;
+            opacity: 0;
+            z-index: 999;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 24px;
+            color: #5e6f97;
+            font-size: 0.7rem;
+        }
+
+        .highlight {
+            color: #FFD966;
+            font-weight: bold;
+        }
+
+        @media (max-width: 550px) {
+            .editor-card {
+                padding: 18px;
+            }
+            .btn-group {
+                flex-direction: column;
+            }
+            h1 {
+                font-size: 1.6rem;
+            }
+            .toast-msg {
+                white-space: normal;
+                text-align: center;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="editor-card">
+        <div class="logo">
+            <h1>⚡ LH DROID PLAY+</h1>
+            <div class="badge">SERVIDOR TURBO</div>
+        </div>
+        <div class="sub">💰 Edite seu discurso de venda abaixo! Copie e cole no WhatsApp para vender mais.</div>
+
+        <!-- CAMPOS EDITÁVEIS - FRASE PRINCIPAL COM TOM DE VENDA -->
+        <div class="edit-section">
+            <div class="section-title"><span>🎯</span> Frase de Venda (principal)</div>
+            <textarea id="frasePrincipal" rows="3">🔥 LH DROID PLAY+ é o servidor exclusivo para quem quer assistir FILMES, SÉRIES, NOVELAS E CANAIS PAGOS num só lugar. Sem travar, sem anúncio, com qualidade FULL HD/4K. Assine agora e tenha o melhor streaming por menos de R$30,00 por mês! 🚀</textarea>
+            <div class="chips-group"><span class="chip">💡 Dica: use gatilhos como "exclusivo", "acesso vitalício", "melhor custo-benefício"</span></div>
+        </div>
+
+        <div class="edit-section">
+            <div class="section-title"><span>🎬</span> Filmes atuais (exemplos)</div>
+            <textarea id="filmesExemplo" placeholder="Ex: Deadpool 3, Duna 2, Divertida Mente 2">Deadpool 3 (2024), Duna: Parte 2, Divertida Mente 2, Furiosa, Twisters</textarea>
+            <div class="chips-group"><span class="chip">🍿 Lançamentos que tão bombando nos cinemas</span></div>
+        </div>
+
+        <div class="edit-section">
+            <div class="section-title"><span>📺</span> Séries mais assistidas</div>
+            <textarea id="seriesExemplo" placeholder="Ex: Round 6, The Last of Us, House of the Dragon">Round 6 (Temporada 2), The Last of Us, House of the Dragon, Fallout, The Boys</textarea>
+            <div class="chips-group"><span class="chip">🔥 Top séries da semana — atualizadas automático</span></div>
+        </div>
+
+        <div class="edit-section">
+            <div class="section-title"><span>📡</span> Canais pagos / apps inclusos</div>
+            <textarea id="canaisExemplo" placeholder="Ex: Globo Play, Sportv, Telecine">Globo Play, Sportv, Telecine, Paramount+, Warner, Disney+, HBO Max, ESPN</textarea>
+        </div>
+
+        <div class="edit-section">
+            <div class="section-title"><span>✨</span> Fechamento / CTA (Call to Action)</div>
+            <input type="text" id="fechamento" value="📲 Garanta seu acesso ao LH DROID PLAY+ hoje mesmo! Chama no PV e testa grátis 🔥">
+        </div>
+
+        <!-- DIFERENCIAIS LH DROID -->
+        <div class="edit-section">
+            <div class="section-title"><span>⚡</span> Diferenciais do LH DROID PLAY+ (opcional)</div>
+            <textarea id="diferenciais" placeholder="Ex: sem trava, 4K, atualizações semanais">
+✅ Sem TRAVAS e sem anúncios
+✅ Suporte 24h
+✅ Biblioteca com +30.000 títulos
+✅ Atualizações toda semana</textarea>
+        </div>
+
+        <!-- PREVIEW AO VIVO -->
+        <div class="preview-area">
+            <div class="preview-label">
+                <span>📱 PREVIEW DO SEU TEXTO DE VENDA</span>
+                <span style="font-size: 0.7rem;">(formato WhatsApp com negrito)</span>
+            </div>
+            <div class="preview-message" id="previewMessage">
+                <!-- conteúdo gerado via js -->
+            </div>
+        </div>
+
+        <!-- BOTÕES -->
+        <div class="btn-group">
+            <button class="btn btn-copy" id="copiarWhatsBtn">
+                📲 Copiar para WhatsApp (venda pronta)
+            </button>
+            <button class="btn btn-primary" id="copiarTextoBtn">
+                📋 Copiar texto puro
+            </button>
+            <button class="btn btn-reset" id="resetBtn">
+                🔄 Restaurar modelo premium
+            </button>
+        </div>
+        <footer>
+            ✅ Edite os campos → tudo se atualiza ao vivo → clique em "Copiar para WhatsApp" → cole direto no chat e comece a vender o LH DROID PLAY+!
+        </footer>
+    </div>
+</div>
+<div id="toast" class="toast-msg">✨ Copiado! Agora é só vender no WhatsApp 🚀</div>
+
+<script>
+    // Elementos DOM
+    const fraseInput = document.getElementById('frasePrincipal');
+    const filmesTextarea = document.getElementById('filmesExemplo');
+    const seriesTextarea = document.getElementById('seriesExemplo');
+    const canaisTextarea = document.getElementById('canaisExemplo');
+    const fechamentoInput = document.getElementById('fechamento');
+    const diferenciaisTextarea = document.getElementById('diferenciais');
+    const previewDiv = document.getElementById('previewMessage');
+
+    // Função para construir mensagem COM TOM DE VENDA + nome servidor incluso
+    function construirMensagem() {
+        const fraseBase = fraseInput.value.trim();
+        const filmes = filmesTextarea.value.trim();
+        const series = seriesTextarea.value.trim();
+        const canais = canaisTextarea.value.trim();
+        const fechamento = fechamentoInput.value.trim();
+        const diferenciais = diferenciaisTextarea.value.trim();
+
+        let mensagem = fraseBase;
+
+        if (filmes !== "") {
+            mensagem += `\n\n🎬 *FILMES ATUAIS:*\n${filmes}`;
+        }
+
+        if (series !== "") {
+            mensagem += `\n\n📺 *SÉRIES MAIS ASSISTIDAS:*\n${series}`;
+        }
+
+        if (canais !== "") {
+            mensagem += `\n\n📡 *CANAL PAGOS INCLUSOS:*\n${canais}`;
+        }
+
+        if (diferenciais !== "") {
+            mensagem += `\n\n⚡ *DIFERENCIAIS LH DROID PLAY+:*\n${diferenciais}`;
+        }
+
+        if (fechamento !== "") {
+            mensagem += `\n\n✨ ${fechamento}`;
+        }
+
+        // Garantir que o nome do servidor esteja em destaque caso não apareça (mas já está na frase)
+        if (!mensagem.toLowerCase().includes("lh droid")) {
+            mensagem = `🔥 *LH DROID PLAY+* — O melhor servidor!\n\n` + mensagem;
+        }
+
+        return mensagem;
+    }
+
+    // Atualizar preview
+    function atualizarPreview() {
+        const msg = construirMensagem();
+        let htmlPreview = msg.replace(/\*(.*?)\*/g, '<strong>$1</strong>');
+        htmlPreview = htmlPreview.replace(/\n/g, '<br>');
+        previewDiv.innerHTML = htmlPreview;
+    }
+
+    // Copiar texto para área de transferência
+    async function copiarTexto() {
+        const textoCompleto = construirMensagem();
+        try {
+            await navigator.clipboard.writeText(textoCompleto);
+            mostrarToast("✅ Copiado! Agora cole no WhatsApp e venda!");
+        } catch (err) {
+            const textareaTemp = document.createElement('textarea');
+            textareaTemp.value = textoCompleto;
+            document.body.appendChild(textareaTemp);
+            textareaTemp.select();
+            document.execCommand('copy');
+            document.body.removeChild(textareaTemp);
+            mostrarToast("📋 Copiado! Perfeito para WhatsApp.");
+        }
+    }
+
+    async function copiarParaWhatsApp() {
+        const textoWhats = construirMensagem();
+        try {
+            await navigator.clipboard.writeText(textoWhats);
+            mostrarToast("📲 Texto de venda copiado! Vai no WhatsApp e cole (segurar > colar) 🚀");
+        } catch (e) {
+            const textareaTemp = document.createElement('textarea');
+            textareaTemp.value = textoWhats;
+            document.body.appendChild(textareaTemp);
+            textareaTemp.select();
+            document.execCommand('copy');
+            document.body.removeChild(textareaTemp);
+            mostrarToast("📲 Copiado! Agora cole no WhatsApp e feche a venda.");
+        }
+    }
+
+    function mostrarToast(mensagem) {
+        const toast = document.getElementById('toast');
+        toast.textContent = mensagem || "✨ Copiado! Venda no WhatsApp!";
+        toast.style.opacity = '1';
+        setTimeout(() => {
+            toast.style.opacity = '0';
+        }, 2500);
+    }
+
+    // Reset com foco total no LH DROID PLAY+ e tom de venda pesado
+    function resetModelo() {
+        fraseInput.value = "🔥 LH DROID PLAY+ é o servidor definitivo para quem quer assistir FILMES ATUAIS, SÉRIES MAIS ASSISTIDAS, NOVELAS E CANAIS PAGOS num só lugar. Sem travar, sem anúncio, com qualidade FULL HD/4K. Assine agora e tenha o melhor streaming por menos de R$XX por mês! 🚀";
+        filmesTextarea.value = "Deadpool 3 (2024), Duna: Parte 2, Divertida Mente 2, Furiosa, Twisters, Venom 3";
+        seriesTextarea.value = "Round 6 (Temporada 2), The Last of Us, House of the Dragon, Fallout, The Boys, Grey's Anatomy (nova temp)";
+        canaisTextarea.value = "Globo Play, Sportv, Telecine, Paramount+, Warner, Disney+, HBO Max, ESPN, Discovery+";
+        fechamentoInput.value = "📲 Garanta seu acesso vitalício ao LH DROID PLAY+ hoje mesmo! Chama no PV e testa grátis 🔥";
+        diferenciaisTextarea.value = "✅ Sem TRAVAS e sem anúncios\n✅ Suporte 24h no WhatsApp\n✅ Biblioteca com +30.000 títulos\n✅ Atualizações toda semana\n✅ Funciona em qualquer TV, celular ou PC";
+        atualizarPreview();
+        mostrarToast("🔄 Modelo LH DROID PLAY+ restaurado com exemplos atualíssimos e tom de venda!");
+    }
+
+    // Eventos
+    const inputs = [fraseInput, filmesTextarea, seriesTextarea, canaisTextarea, fechamentoInput, diferenciaisTextarea];
+    inputs.forEach(input => {
+        input.addEventListener('input', atualizarPreview);
+    });
+
+    document.getElementById('copiarWhatsBtn').addEventListener('click', copiarParaWhatsApp);
+    document.getElementById('copiarTextoBtn').addEventListener('click', copiarTexto);
+    document.getElementById('resetBtn').addEventListener('click', resetModelo);
+
+    atualizarPreview();
+</script>
+</body>
+</html>
